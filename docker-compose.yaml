@@ -1,0 +1,19 @@
+services:
+  matching-redis:
+    container_name: matching-redis
+    image: redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./storage/redis-data:/data
+
+  matching-mq:
+    container_name: matching-mq
+    image: rabbitmq:3-management
+    restart: unless-stopped
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+        - ./storage/mq-data:/var/lib/rabbitmq
